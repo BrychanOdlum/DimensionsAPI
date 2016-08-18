@@ -7,6 +7,12 @@
 			"database": "dimensions",
 			"port": 3307,
 			"connectionLimit": 100
+		},
+		"mongodb": {
+			"host": "mongodb://localhost:27017/dimensions"
+		},
+		"redis": {
+
 		}
 	}
 }

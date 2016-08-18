@@ -1,8 +1,9 @@
 var mongoose = require('mongoose')
 var fs = require('fs')
 var modelsPath = process.cwd() + '/app/models'
+var config = require(process.cwd() + '/app/core/config').data.mongodb;
 
-mongoose.connect(process.env.MONGO_URL, {server:{auto_reconnect:true}})
+mongoose.connect(config.host, {server:{auto_reconnect:true}})
 var db = mongoose.connection
 
 db.on('error', function(err) {
