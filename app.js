@@ -1,4 +1,4 @@
-//require('./app/core/mongoose')
-require('./app/core/mysql')
-//require('./app/core/redis')
+//require('./app/core/data/mongoose')
+require('./app/core/data/mysql')
+//require('./app/core/data/redis')
 require('./app/core/router')

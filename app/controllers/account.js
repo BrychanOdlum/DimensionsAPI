@@ -1,4 +1,4 @@
-var mysql = require(process.cwd() + '/app/core/mysql')
+var mysql = require(process.cwd() + '/app/core/data/mysql')
 var account = require(process.cwd() + '/app/models/account')
 
 
