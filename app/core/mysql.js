@@ -1,12 +1,14 @@
 var mysql = require('mysql');
+var fs = require('fs')
+var config = require(process.cwd() + '/app/core/config').data.mysql;
 
 var pool = mysql.createPool({
-	host: '127.0.0.1',
-	user: 'dimensions',
-	password: 'YYv6FAdVATd7rgK7GWFg4gPx',
-	database: 'dimensions',
-	port: 3307,
-	connectionLimit: 10
+	host: config.host,
+	user: config.user,
+	password: config.password,
+	database: config.database,
+	port: config.port,
+	connectionLimit: config.connectionLimit
 })
 
 exports.query = function(sql, values, callback) {

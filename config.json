@@ -1,0 +1,12 @@
+{
+	"data": {
+		"mysql": {
+			"host": "127.0.0.1",
+			"user": "dimensions",
+			"password": "YYv6FAdVATd7rgK7GWFg4gPx",
+			"database": "dimensions",
+			"port": 3307,
+			"connectionLimit": 100
+		}
+	}
+}

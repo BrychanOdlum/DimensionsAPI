@@ -27,10 +27,6 @@ server
 // USER REQUESTS
 server.get("/account/initiate", controllers.account.accountInitiate)
 
-server.post("/account", controllers.account.createAccount)
-server.get("/account/:id", controllers.account.viewAccount)
-server.put("/account/:id", controllers.account.updateAccount)
-server.del("/account/:id", controllers.account.deleteAccount)
 
 
 // DIMENSION REQUESTS
