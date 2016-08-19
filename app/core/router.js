@@ -20,6 +20,7 @@ server
 	.use(restify.bodyParser())
 	.use(restify.queryParser())
 	.use(responseParser.apiFormat)
+	.use(responseParser.apiVerify)
 	.use(logger('dev'))
 
 

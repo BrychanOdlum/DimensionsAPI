@@ -1,13 +1,22 @@
+exports.apiVerify = function(req, res, next) {
+	if (typeof req.headers['auth-token'] === 'undefined') {
+		res.json(401, {
+			ErrorMessage: "Failed to authenticate"
+		})
+	}
+	next();
+}
+
 exports.apiFormat = function(req, res, next) {
 	var json = res.json;
 	res.json = function(code, payload, headers) {
 		if (code === undefined) {
-			code = 200;
+			code = 200
 		}
 		if (code.constructor.name !== 'Number') {
-			headers = payload;
-			payload = code;
-			code = 200;
+			headers = payload
+			payload = code
+			code = 200
 		}
 
 		var errorMsg = payload.ErrorMessage;
@@ -26,5 +35,5 @@ exports.apiFormat = function(req, res, next) {
 
 		json.call(this, code, response, headers)
 	}
-	next();
+	next()
 }

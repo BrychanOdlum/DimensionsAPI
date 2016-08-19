@@ -11,7 +11,7 @@ exports.create = function(node, key, timestamp, lastrequest) {
 exports.find = function(node, key) {
 	mysql.query('SELECT `id` FROM `nodesessions` WHERE `node` = ? AND `key` = ?', [node, key], function(err, result, field) {
 		if (result.length == 1)
-			callback(true);
-		callback(false);
+			callback(true)
+		callback(false)
 	})
 }

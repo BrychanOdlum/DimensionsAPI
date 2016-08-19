@@ -14,7 +14,7 @@ exports.initiate = function(req, res, next) {
 			data.Connected = response
 			if (!data.Registered) {
 				res.json(data)
-				return;
+				return
 			}
 			account.isLoggedIn(req.params.name, req.params.cid, req.params.ip, function(response) {
 				data.LoggedIn = response
