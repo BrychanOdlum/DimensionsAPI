@@ -19,12 +19,8 @@ server
 	.use(restify.fullResponse())
 	.use(restify.bodyParser())
 	.use(restify.queryParser())
-	.use(responseParser.handleErrors)
+	.use(responseParser.apiFormat)
 	.use(logger('dev'))
-
-function modify(req, res, next) {
-	console.log()
-}
 
 
 // USER REQUESTS
