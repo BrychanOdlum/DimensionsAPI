@@ -23,8 +23,12 @@ server
 	.use(logger('dev'))
 
 
+// NODE REQUESTS
+server.get("/node/initiate", controllers.node.initiate)
+server.get("/node/verify", controllers.node.verify)
+
 // USER REQUESTS
-server.get("/account/initiate", controllers.account.accountInitiate)
+server.get("/account/initiate", controllers.account.initiate)
 
 
 

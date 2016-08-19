@@ -2,7 +2,7 @@ var mysql = require(process.cwd() + '/app/core/data/mysql')
 var account = require(process.cwd() + '/app/models/account')
 
 
-exports.accountInitiate = function(req, res, next) {
+exports.initiate = function(req, res, next) {
 	var data = {
 		Connected: false,
 		Registered: false,
