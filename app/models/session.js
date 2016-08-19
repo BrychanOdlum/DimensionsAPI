@@ -13,5 +13,5 @@ exports.findSession = function(account, cid, ip, callback) {
 		if (result.length == 1)
 			callback(true);
 		callback(false);
-	});
+	})
 }

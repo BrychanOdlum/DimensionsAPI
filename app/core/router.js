@@ -2,6 +2,7 @@ var restify = require('restify')
 var fs = require('fs')
 var logger  = require('morgan')
 var controllersPath = process.cwd() + '/app/controllers'
+var responseParser = require(process.cwd() + '/app/core/responseParser')
 
 
 //Lets fetch our controllers
@@ -12,20 +13,18 @@ fs.readdirSync(controllersPath).forEach(function(file) {
 	}
 })
 
-
 // Create server
 var server = restify.createServer()
 server
 	.use(restify.fullResponse())
 	.use(restify.bodyParser())
 	.use(restify.queryParser())
+	.use(responseParser.handleErrors)
 	.use(logger('dev'))
-/*	.use(function (req, res, next) {
-		console.log(res);
-		next();
-	})*/
 
-
+function modify(req, res, next) {
+	console.log()
+}
 
 
 // USER REQUESTS

@@ -3,11 +3,12 @@ var mysql = require(process.cwd() + '/app/core/data/mysql')
 
 
 exports.isConnected = function(name, callback) {
-	mysql.query('SELECT * FROM `sessions` WHERE `id` = ')
+	//mysql.query('SELECT * FROM `sessions` WHERE `id` = ')
+	callback(true)
 }
 
 exports.isRegistered = function(name, callback) {
-	mysql.query('SELECT `id` FROM `accounts` WHERE `name` = ?', [req.params.name], function(err, result, field) {
+	mysql.query('SELECT `id` FROM `accounts` WHERE `name` = ?', [name], function(err, result, field) {
 		if (result.length == 1)
 			callback(true);
 		callback(false);
