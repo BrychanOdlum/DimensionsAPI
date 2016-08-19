@@ -20,6 +20,10 @@ server
 	.use(restify.bodyParser())
 	.use(restify.queryParser())
 	.use(logger('dev'))
+/*	.use(function (req, res, next) {
+		console.log(res);
+		next();
+	})*/
 
 
 
@@ -35,6 +39,7 @@ server.get("/account/initiate", controllers.account.accountInitiate)
 // ERRORS
 server.on('BadRequest', controllers.errors.badRequest);
 server.on('NotFound', controllers.errors.notFound);
+
 
 
 

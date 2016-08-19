@@ -9,8 +9,8 @@ exports.isConnected = function(name, callback) {
 exports.isRegistered = function(name, callback) {
 	mysql.query('SELECT `id` FROM `accounts` WHERE `name` = ?', [req.params.name], function(err, result, field) {
 		if (result.length == 1)
-			return true;
-		return false;
+			callback(true);
+		callback(false);
 	});
 }
 
@@ -18,7 +18,7 @@ exports.isRegistered = function(name, callback) {
 exports.isLoggedIn = function(name, cid, ip, callback) {
 	mysql.query('SELECT 1 FROM `accounts` WHERE `name` = ? AND `cid` = ? AND `ip` = ?', [name, cid, ip], function(err, result, field) {
 		if (result.length == 1)
-			return true;
-		return false;
+			callback(true);
+		callback(false);
 	});
 }

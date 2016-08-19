@@ -4,7 +4,7 @@ var account = require(process.cwd() + '/app/models/account')
 
 exports.accountInitiate = function(req, res, next) {
 	var data = {
-		Connceted: false,
+		Connected: false,
 		Registered: false,
 		LoggedIn: false,
 	}
@@ -13,12 +13,12 @@ exports.accountInitiate = function(req, res, next) {
 		account.isConnected(req.params.name, function(response) {
 			data.Connected = response
 			if (!data.Registered) {
-				res.json(response)
+				res.json(data)
 				return;
 			}
 			account.isLoggedIn(req.params.name, req.params.cid, req.params.ip, function(response) {
 				data.LoggedIn = response
-				res.json(response)
+				res.json(data)
 			})
 		})
 	})
