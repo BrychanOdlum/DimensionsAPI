@@ -1,17 +1,27 @@
 var mysql = require(process.cwd() + '/app/core/data/mysql')
+var crypto = require('crypto');
 
 
 
-exports.create = function(node, key, timestamp, lastrequest) {
-	mysql.query('INSERT INTO `nodesessions` (`node`, `key`, `timestamp`, `lastrequest`) VALUES (?, ?, ?, ?)', [name, key, timestamp, lastrequest], function(err, result, field) {
-		callback("true")
+exports.create = function(node, callback) {
+	var timestamp = Math.floor(Date.now() / 1000)
+	var token = node + "." + crypto.randomBytes(64).toString('hex');
+	token = new Buffer(token).toString('base64');
+	mysql.query('INSERT INTO `nodesessions` (`node`, `token`, `timestamp`, `lastrequest`) VALUES (?, ?, ?, ?)', [node, token, timestamp, timestamp], function(err, result) {
+		if (err) {
+			callback(null)
+			return
+		}
+		callback(token)
 	})
 }
 
-exports.find = function(node, key) {
-	mysql.query('SELECT `id` FROM `nodesessions` WHERE `node` = ? AND `key` = ?', [node, key], function(err, result, field) {
-		if (result.length == 1)
-			callback(true)
-		callback(false)
+exports.find = function(key, callback) {
+	mysql.query('SELECT `id` FROM `nodesessions` WHERE `key` = ? ORDER BY `id` DESC LIMIT 1', [key], function(err, result, field) {
+		if ((err) || result.length !== 1) {
+			callback(null)
+			return;
+		}
+		callback(result[0].id)
 	})
 }

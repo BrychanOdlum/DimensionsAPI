@@ -55,7 +55,7 @@ server.listen(port, function(err) {
 
 
 // If we're in production then lets through some nicely formatted errors and not crash everything.
-if (process.env.environment == 'production') {
+if (process.env.environment != 'test') {
 	process.on('uncaughtException', function(err) {
 		console.error(JSON.parse(JSON.stringify(err, ['stack', 'message', 'inner'], 2)))
 	})

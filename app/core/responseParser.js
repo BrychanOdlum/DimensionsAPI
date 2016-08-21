@@ -1,8 +1,10 @@
 exports.apiVerify = function(req, res, next) {
-	if (typeof req.headers['auth-token'] === 'undefined') {
-		res.json(401, {
-			ErrorMessage: "Failed to authenticate"
-		})
+	if (req.route.path != '/node/initiate') {
+		if (typeof req.headers['auth-token'] === 'undefined') {
+			res.json(401, {
+				ErrorMessage: "Failed to authenticate"
+			})
+		}
 	}
 	next();
 }

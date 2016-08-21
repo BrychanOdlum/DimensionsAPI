@@ -8,7 +8,7 @@ exports.isConnected = function(name, callback) {
 }
 
 exports.isRegistered = function(name, callback) {
-	mysql.query('SELECT `id` FROM `accounts` WHERE `name` = ?', [name], function(err, result, field) {
+	mysql.query('SELECT `id` FROM `accounts` WHERE `name` = ?', [name], function(err, result) {
 		if (result.length == 1)
 			callback(true)
 		callback(false)
@@ -17,7 +17,7 @@ exports.isRegistered = function(name, callback) {
 
 // TODO: USE SESSION TABLE
 exports.isLoggedIn = function(name, cid, ip, callback) {
-	mysql.query('SELECT 1 FROM `accounts` WHERE `name` = ? AND `cid` = ? AND `ip` = ?', [name, cid, ip], function(err, result, field) {
+	mysql.query('SELECT 1 FROM `accounts` WHERE `name` = ? AND `cid` = ? AND `ip` = ?', [name, cid, ip], function(err, result) {
 		if (result.length == 1)
 			callback(true)
 		callback(false)
