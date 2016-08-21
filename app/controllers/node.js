@@ -11,7 +11,6 @@ exports.initiate = function(req, res, next) {
 			res.json(data)
 			next()
 		} else {
-
 			nodeSession.create(serverId, function(token) {
 				if (token === null) {
 					data.ErrorMessage = "Could not create session"

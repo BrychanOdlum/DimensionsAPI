@@ -19,9 +19,9 @@ server
 	.use(restify.fullResponse())
 	.use(restify.bodyParser())
 	.use(restify.queryParser())
-	.use(responseParser.apiFormat)
-	.use(responseParser.apiVerify)
 	.use(logger('dev'))
+	.use(responseParser.apiVerify)
+	.use(responseParser.apiFormat)
 
 
 // NODE REQUESTS

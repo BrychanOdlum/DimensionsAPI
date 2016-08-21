@@ -1,12 +1,26 @@
+var nodeSession = require(process.cwd() + '/app/models/nodeSession')
+
 exports.apiVerify = function(req, res, next) {
 	if (req.route.path != '/node/initiate') {
-		if (typeof req.headers['auth-token'] === 'undefined') {
+		if (typeof req.headers['authorization'] === 'undefined') {
 			res.json(401, {
 				ErrorMessage: "Failed to authenticate"
 			})
+			res.end()
+		} else {
+			var token = req.headers['authorization'].substring(6)
+			nodeSession.find(token, function(nodeId) {
+				if (nodeId === null) {
+					res.json(401, {
+						ErrorMessage: "Failed to authenticate"
+					})
+					res.end()
+				} else {
+					next();
+				}
+			})
 		}
 	}
-	next();
 }
 
 exports.apiFormat = function(req, res, next) {

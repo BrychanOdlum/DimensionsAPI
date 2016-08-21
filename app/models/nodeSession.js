@@ -17,7 +17,7 @@ exports.create = function(node, callback) {
 }
 
 exports.find = function(key, callback) {
-	mysql.query('SELECT `id` FROM `nodesessions` WHERE `key` = ? ORDER BY `id` DESC LIMIT 1', [key], function(err, result, field) {
+	mysql.query('SELECT `id` FROM `nodesessions` WHERE `token` = ? ORDER BY `id` DESC LIMIT 1', [key], function(err, result) {
 		if ((err) || result.length !== 1) {
 			callback(null)
 			return;
