@@ -1,7 +1,9 @@
 var nodeSession = require(process.cwd() + '/app/models/nodeSession')
 
 exports.apiVerify = function(req, res, next) {
-	if (req.route.path != '/node/initiate') {
+	if (req.route.path === '/node/initiate') {
+		next()
+	} else {
 		if (typeof req.headers['authorization'] === 'undefined') {
 			res.json(401, {
 				ErrorMessage: "Failed to authenticate"
