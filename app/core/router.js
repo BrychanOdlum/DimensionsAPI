@@ -30,6 +30,8 @@ server.get("/node/verify", controllers.node.verify)
 
 // USER REQUESTS
 server.get("/account/initiate", controllers.account.initiate)
+server.get("/account/login", controllers.account.login)
+server.get("/account/password", controllers.account.setPassword)
 
 
 
