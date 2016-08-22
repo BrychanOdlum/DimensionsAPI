@@ -6,11 +6,12 @@ var responseParser = require(process.cwd() + '/app/core/responseParser')
 
 
 //Lets fetch our controllers
-var controllers = {}
-fs.readdirSync(controllersPath).forEach(function(file) {
-	if (~file.indexOf('.js')) {
-		controllers[file.split('.')[0]] = require(controllersPath + '/' + file)
-	}
+var controllers = {mc: {},cp: {}}
+fs.readdirSync(process.cwd() + '/app/mc/controllers/').forEach(function(file) {
+		controllers.mc[file.split('.')[0]] = require(process.cwd() + '/app/mc/controllers/' + file)
+})
+fs.readdirSync(process.cwd() + '/app/cp/controllers/').forEach(function(file) {
+		controllers.cp[file.split('.')[0]] = require(process.cwd() + '/app/cp/controllers/' + file)
 })
 
 // Create server
@@ -24,23 +25,20 @@ server
 	.use(responseParser.apiFormat)
 
 
-// NODE REQUESTS
-server.get("/node/initiate", controllers.node.initiate)
-server.get("/node/verify", controllers.node.verify)
-
-// USER REQUESTS
-server.get("/account/initiate", controllers.account.initiate)
-server.get("/account/login", controllers.account.login)
-server.get("/account/password", controllers.account.setPassword)
-
+// MC REQUESTS
+server.get("/node/initiate", controllers.mc.node.initiate)
+server.get("/node/verify", controllers.mc.node.verify)
+server.get("/account/initiate", controllers.mc.account.initiate)
+server.get("/account/login", controllers.mc.account.login)
+server.get("/account/password", controllers.mc.account.setPassword)
 
 
 // DIMENSION REQUESTS
 
 
 // ERRORS
-server.on('BadRequest', controllers.errors.badRequest);
-server.on('NotFound', controllers.errors.notFound);
+server.on('BadRequest', controllers.mc.errors.badRequest);
+server.on('NotFound', controllers.mc.errors.notFound);
 
 
 

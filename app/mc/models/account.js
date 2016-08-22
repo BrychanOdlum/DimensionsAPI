@@ -1,6 +1,6 @@
 var mysql = require(process.cwd() + '/app/core/data/mysql')
 var bcrypt = require('bcrypt')
-var session = require(process.cwd() + '/app/models/accountSession')
+var session = require(process.cwd() + '/app/mc/models/accountSession')
 
 exports.getId = function(name, callback) {
 	mysql.query('SELECT `id`, `registered` FROM `accounts` WHERE `name` = ?', [name], function(err, result) {

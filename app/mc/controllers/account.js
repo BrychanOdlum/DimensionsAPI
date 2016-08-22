@@ -1,6 +1,6 @@
 var mysql = require(process.cwd() + '/app/core/data/mysql')
-var account = require(process.cwd() + '/app/models/account')
-var session = require(process.cwd() + '/app/models/accountSession')
+var account = require(process.cwd() + '/app/mc/models/account')
+var session = require(process.cwd() + '/app/mc/models/accountSession')
 
 
 exports.initiate = function(req, res, next) {

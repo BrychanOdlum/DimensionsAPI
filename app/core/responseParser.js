@@ -1,4 +1,4 @@
-var nodeSession = require(process.cwd() + '/app/models/nodeSession')
+var nodeSession = require(process.cwd() + '/app/mc/models/nodeSession')
 
 exports.apiVerify = function(req, res, next) {
 	if (req.route.path === '/node/initiate') {

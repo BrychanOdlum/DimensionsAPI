@@ -1,6 +1,6 @@
 var mysql = require(process.cwd() + '/app/core/data/mysql')
-var node = require(process.cwd() + '/app/models/node')
-var nodeSession = require(process.cwd() + '/app/models/nodeSession')
+var node = require(process.cwd() + '/app/mc/models/node')
+var nodeSession = require(process.cwd() + '/app/mc/models/nodeSession')
 
 
 exports.initiate = function(req, res, next) {
