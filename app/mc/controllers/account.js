@@ -185,13 +185,21 @@ exports.disconnct = function(req, res, next) {
 			return
 	}
 	var xuid = typeof req.params.xuid !== 'undefined' ? req.params.xuid : null
-	session.disconnect(accResponse.id, req.params.cid, req.params.ip, xuid, function(session) {
-		if (typeof session === 'undefined') {
-			res.json(500, {
-				ErrorMessage: "An error occured trying to find the account session"
+	account.getId(req.params.name, function(accResponse) {
+		if (typeof accResponse === 'undefined') {
+			res.json({
+				ErrorMessage: "Could not get account ID"
 			})
 			return
 		}
-		res.json({});
+		session.disconnect(accResponse.id, req.params.cid, req.params.ip, xuid, function(session) {
+			if (typeof session === 'undefined') {
+				res.json(500, {
+					ErrorMessage: "An error occured trying to find the account session"
+				})
+				return
+			}
+			res.json({});
+		})
 	})
 }
