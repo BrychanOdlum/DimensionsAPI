@@ -7,10 +7,10 @@ var controllersPath = process.cwd() + '/app/controllers'
 //Lets fetch our controllers
 var controllers = {mc: {},cp: {}}
 fs.readdirSync(process.cwd() + '/app/mc/controllers/').forEach(function(file) {
-		controllers.mc[file.split('.')[0]] = require(process.cwd() + '/app/mc/controllers/' + file)
+	controllers.mc[file.split('.')[0]] = require(process.cwd() + '/app/mc/controllers/' + file)
 })
 fs.readdirSync(process.cwd() + '/app/cp/controllers/').forEach(function(file) {
-		controllers.cp[file.split('.')[0]] = require(process.cwd() + '/app/cp/controllers/' + file)
+	controllers.cp[file.split('.')[0]] = require(process.cwd() + '/app/cp/controllers/' + file)
 })
 
 // Create server
@@ -34,7 +34,7 @@ server.get("/mc/account/password", controllers.mc.account.setPassword)
 server.get("/mc/account/disconnect", controllers.mc.account.disconnct)
 
 
-// DIMENSION REQUESTS
+// CP REQUESTS
 
 
 // ERRORS
