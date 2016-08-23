@@ -2,7 +2,6 @@ var restify = require('restify')
 var fs = require('fs')
 var logger  = require('morgan')
 var controllersPath = process.cwd() + '/app/controllers'
-var responseParser = require(process.cwd() + '/app/core/responseParser')
 
 
 //Lets fetch our controllers
@@ -21,16 +20,17 @@ server
 	.use(restify.bodyParser())
 	.use(restify.queryParser())
 	.use(logger('dev'))
-	.use(responseParser.apiVerify)
-	.use(responseParser.apiFormat)
+	.use(require(process.cwd() + '/app/core/utils/authentication').authenticate)
+	.use(require(process.cwd() + '/app/core/utils/parser').parse)
 
 
 // MC REQUESTS
-server.get("/node/initiate", controllers.mc.node.initiate)
-server.get("/node/verify", controllers.mc.node.verify)
-server.get("/account/initiate", controllers.mc.account.initiate)
-server.get("/account/login", controllers.mc.account.login)
-server.get("/account/password", controllers.mc.account.setPassword)
+server.get("/mc/node/initiate", controllers.mc.node.initiate)
+server.get("/mc/node/verify", controllers.mc.node.verify)
+server.get("/mc/account/initiate", controllers.mc.account.initiate)
+server.get("/mc/account/register", controllers.mc.account.register)
+server.get("/mc/account/login", controllers.mc.account.login)
+server.get("/mc/account/password", controllers.mc.account.setPassword)
 
 
 // DIMENSION REQUESTS
