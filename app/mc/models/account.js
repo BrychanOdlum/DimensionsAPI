@@ -15,7 +15,6 @@ exports.getId = function(name, callback) {
 			})
 			return
 		}
-
 		mysql.query('INSERT INTO `accounts` (`name`) VALUES (?)', [name], function(err, result) {
 			if (err) {
 				callback(null)
@@ -31,8 +30,7 @@ exports.getId = function(name, callback) {
 					registered: false
 				})
 			})
-		})
-
+		}}
 	})
 }
 
