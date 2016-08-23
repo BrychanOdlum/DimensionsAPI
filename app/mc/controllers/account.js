@@ -26,24 +26,16 @@ exports.initiate = function(req, res, next) {
 			return
 		}
 		data.Registered = accResponse.registered
-		session.isConnected(accResponse.id, function(isConnected) {
-			if (typeof isConnected === 'undefined') {
+		session.get(accResponse.id, req.params.cid, req.params.ip, xuid, req.node, function(session) {
+			if (typeof session === 'undefined') {
 				res.json(500, {
 					ErrorMessage: "An error occured trying to find the previous account session"
 				})
 				return
 			}
-			data.Connected = isConnected;
-			if (isConnected) {
-				res.json(data);
-				return;
-			}
-			session.get(accResponse.id, req.params.cid, req.params.ip, xuid, 1, function(sessResponse) {
-				if (sessResponse === true) {
-					data.LoggedIn = true
-				}
-				res.json(data);
-			})
+			data.Connected = session.Connected;
+			data.LoggedIn = session.LoggedIn;
+			res.json(data);
 		})
 	})
 }

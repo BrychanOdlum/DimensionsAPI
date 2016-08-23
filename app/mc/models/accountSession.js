@@ -19,7 +19,7 @@ exports.get = function(account, cid, ip, xuid, node, callback) {
 
 	var timestamp = Math.floor(Date.now() / 1000);
 
-	mysql.query('SELECT `loggedin`, `node` FROM `accountsessions` WHERE `account` = ? AND `cid` = ? AND `IP` = ? ORDER BY `id` DESC LIMIT 1', [account, cid, ip], function(err, result) {
+	mysql.query('SELECT `node`, `connected`, `loggedin` FROM `accountsessions` WHERE `account` = ? AND `cid` = ? AND `IP` = ? ORDER BY `id` DESC LIMIT 1', [account, cid, ip], function(err, result) {
 		if (err) {
 			callback(null)
 			return
@@ -28,7 +28,10 @@ exports.get = function(account, cid, ip, xuid, node, callback) {
 			if (result[0].node != node) {
 				mysql.query('UPDATE `accountsessions` SET `node` = ? WHERE `account` = ? AND `cid` = ? AND `IP` = ? ORDER BY `id` DESC LIMIT 1', [node, account, cid, ip])
 			}
-			callback(result[0].loggedin === 1 ? true : false)
+			callback({
+				Connected: result[0].connected === 1 ? true : false,
+				LoggedIn: result[0].loggedin === 1 ? true : false
+			})
 			return
 		}
 
@@ -37,7 +40,10 @@ exports.get = function(account, cid, ip, xuid, node, callback) {
 				callback(null)
 				return
 			}
-			callback(false)
+			callback({
+				Connected: false,
+				LoggedIn: false
+			})
 		})
 	})
 }

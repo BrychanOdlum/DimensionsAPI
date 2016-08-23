@@ -43,7 +43,6 @@ server.on('NotFound', controllers.mc.errors.notFound);
 
 
 
-
 // Server to listen on port, start accepting requests
 var port = process.env.PORT || 3000
 server.listen(port, function(err) {
@@ -55,6 +54,7 @@ server.listen(port, function(err) {
 
 
 // If we're in production then lets through some nicely formatted errors and not crash everything.
+
 if (process.env.environment != 'test') {
 	process.on('uncaughtException', function(err) {
 		console.error(JSON.parse(JSON.stringify(err, ['stack', 'message', 'inner'], 2)))
