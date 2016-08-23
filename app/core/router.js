@@ -31,6 +31,7 @@ server.get("/mc/account/initiate", controllers.mc.account.initiate)
 server.get("/mc/account/register", controllers.mc.account.register)
 server.get("/mc/account/login", controllers.mc.account.login)
 server.get("/mc/account/password", controllers.mc.account.setPassword)
+server.get("/mc/account/disconnect", controllers.mc.account.disconnct)
 
 
 // DIMENSION REQUESTS

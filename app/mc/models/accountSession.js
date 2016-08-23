@@ -57,3 +57,13 @@ exports.login = function(account, cid, ip, xuid, callback) {
 		callback(true)
 	})
 }
+
+exports.disconnect = function(account, cid, ip, xuid, callback) {
+	mysql.query('UPDATE `accountsessions` SET `connected` = 0 WHERE `account` = ? AND `cid` = ? AND `IP` = ? ORDER BY `id` DESC LIMIT 1', [account, cid, ip], function(err) {
+		if (err) {
+			callback(false)
+			return
+		}
+		callback(true)
+	})
+}

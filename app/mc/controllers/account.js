@@ -173,3 +173,25 @@ exports.setPassword = function(req, res, next) {
 		})
 	})
 }
+
+exports.disconnct = function(req, res, next) {
+	if ((typeof req.params.name === 'undefined') ||
+		(typeof req.params.cid === 'undefined') ||
+		(typeof req.params.ip === 'undefined') ||
+		(typeof req.params.password === 'undefined')) {
+			res.json(400, {
+				ErrorMessage: "Not all parameters receieved"
+			})
+			return
+	}
+	var xuid = typeof req.params.xuid !== 'undefined' ? req.params.xuid : null
+	session.disconnect(accResponse.id, req.params.cid, req.params.ip, xuid, function(session) {
+		if (typeof session === 'undefined') {
+			res.json(500, {
+				ErrorMessage: "An error occured trying to find the account session"
+			})
+			return
+		}
+		res.json({});
+	})
+}
